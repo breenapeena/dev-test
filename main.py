@@ -35,7 +35,7 @@ if not os.path.isfile("version") or update_check != open("version").readlines()[
             zip_ref.extractall()
         
         for file_name in os.listdir("dev-test-main"):
-            shutil.move(os.path.join(os.listdir("dev-test-main"), file_name), os.path.abspath(os.getcwd()))        
+            shutil.move(os.path.join("dev-test-main/", file_name), os.path.abspath(os.getcwd())) 
  
             
 
