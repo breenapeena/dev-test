@@ -1,0 +1,23 @@
+errors = [
+    "error in your SQL syntax", "Query failed",
+    "supplied argument is not a valid MySQL result resource in",
+    "You have an error in your SQL syntax", "ORDER BY", "mysql_num_rows()",
+    "SQL query failed", "Microsoft JET Database Engine error '80040e14'",
+    "Microsoft OLE DB Provider for Oracle", "Error:unknown",
+    "mysql_fetch", "Syntax error", "SQL syntax",
+    "where clause", "MySQL", "SQL", "sql", "SQL syntax", "Warning:", "Fatal error:",
+    "mysqli_error()", "Invalid argument supplied for",
+    "Notice: Undefined variable: ",
+    "supplied argument is not a valid MySQL result resource in",
+    "valid MySQL result", "Incorrect syntax near",
+    "Incorrect parameter count in the call to native function ",
+    "You have an error in your SQL syntax", "mysql_num_rows(): ",
+    "mysql_num_row(): ", "mysql_fetch_array(): ", "mysql_query(): ",
+    "mysql_result(): ", "Unknown(): ", "array_merge(): ", "require(): ",
+    "MySQL Error: ", "SQL Error: ", "Unable to jump to row", "Session halted.",
+    "Access denied for", "ODBC SQL Server Driver",
+    "argument should be an array in",
+    " expects parameter 1 to be resource, boolean given in ",
+    "array_key_exists()", "parse_ini_file", "SAFE MODE Restriction in effect.",
+    "include_once", "file_get_contents", "fetch_object()"
+]
