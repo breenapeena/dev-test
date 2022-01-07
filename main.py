@@ -22,7 +22,10 @@ if not os.path.isfile("version") or update_check != open("version").readlines()[
     if update.lower() == "y":
 
         for f in glob.glob("*"):
-            os.remove(f)
+            if os.path.isdir(f):
+                shutil.rmtree(f)
+            else:
+                os.remove(f)
 
         with open("update.zip", "wb") as file:
             for data in requests.get("https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main", stream=True).raw:
