@@ -24,7 +24,7 @@ if not os.path.isfile("version") or update_check != open("version").readlines()[
             if os.path.isdir(f):
                 shutil.rmtree(f)
             else:
-                if ".txt" not in f: 
+                if ".txt" not in f or "requirements.txt" in f: 
                     os.remove(f)
 
         with open("update.zip", "wb") as file:
