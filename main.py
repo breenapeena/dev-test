@@ -7,43 +7,52 @@ import shutil
 import requests
 import zipfile
 
+
 def clear():
     if platform.system() == 'Windows':
         os.system('cls')
     else:
         os.system('clear')
 
+
 print("Checking for updates...")
 
-update_check = requests.get("https://raw.githubusercontent.com/breenapeena/dev-test/main/version").text
+update_check = requests.get(
+    "https://raw.githubusercontent.com/breenapeena/dev-test/main/version").text
 
-if not os.path.isfile("version") or update_check != open("version").readlines()[0]:
-    update = input("WARNING: This version is not up to date with current version. Update? (Y / N): ")
+if not os.path.isfile(
+        "version") or update_check != open("version").readlines()[0]:
+    update = input(
+        "WARNING: This version is not up to date with current version. Update? (Y / N): "
+    )
     if update.lower() == "y":
         for f in glob.glob("*"):
             if os.path.isdir(f):
                 shutil.rmtree(f)
             else:
-                if ".txt" not in f or "requirements.txt" in f: 
+                if ".txt" not in f or "requirements.txt" in f:
                     os.remove(f)
 
         with open("update.zip", "wb") as file:
-            for data in requests.get("https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main", stream=True).raw:
+            for data in requests.get(
+                    "https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main",
+                    stream=True).raw:
                 file.write(data)
-        
+
         with zipfile.ZipFile("update.zip", 'r') as zip_ref:
             zip_ref.extractall()
-        
+
         for file_name in os.listdir("dev-test-main"):
-            shutil.move(os.path.join("dev-test-main/", file_name), os.path.abspath(os.getcwd())) 
+            shutil.move(os.path.join("dev-test-main/", file_name),
+                        os.path.abspath(os.getcwd()))
 
         shutil.rmtree("dev-test-main/")
 
         input("\nUpdate downloaded, restart program via ENTER or close.")
 
         sys.exit()
- 
-            
+else:
+    print("Using latest version.")
 
 print("""
 .%%%%%...%%%%%...%%%%%%..%%%%%%..%%%%%%..%%%%%%..%%..%%....%%.....%%%%..
@@ -58,7 +67,7 @@ print("""
 .................%%..%%..%%..%%..%%..%%..%%.%%.......%%.................
 .................%%%%%....%%%%...%%..%%..%%..%%...%%%%..................
 ........................................................................
-""")      
+""")
 
 if not os.path.isdir("threads/"):
     os.makedirs("threads/")
@@ -101,9 +110,11 @@ while True:
                 else:
                     shutil.rmtree(f"threads/{str(i)}/")
                     time.sleep(.5)
-                    os.makedirs(f"threads/{str(i)}/")  
-                    
-            files = [open(f'threads/{i}/input.txt', 'w') for i in range(threads)]
+                    os.makedirs(f"threads/{str(i)}/")
+
+            files = [
+                open(f'threads/{i}/input.txt', 'w') for i in range(threads)
+            ]
             for i, line in enumerate(infp):
                 files[i % threads].write(line)
             for f in files:
