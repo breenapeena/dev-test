@@ -4,6 +4,7 @@ import time
 from vuln import scan
 import os, platform, sys
 import shutil
+import requests
 
 
 def clear():
@@ -11,6 +12,7 @@ def clear():
         os.system('cls')
     else:
         os.system('clear')
+
 
 
 print("""
