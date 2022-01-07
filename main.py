@@ -13,7 +13,15 @@ def clear():
     else:
         os.system('clear')
 
+print("Checking for updates...")
 
+update_check = requests.get("https://raw.githubusercontent.com/breenapeena/dev-test/main/version").text
+
+if update_check != open("version").readlines()[0]:
+    update = input("WARNING: This version is not up to date with current. Update? (Y / N)")
+    if update.lower() == "y":
+        with open("update.zip", "wb") as file:
+            file.write(requests.get("https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main").raw)
 
 print("""
 .%%%%%...%%%%%...%%%%%%..%%%%%%..%%%%%%..%%%%%%..%%..%%....%%.....%%%%..
