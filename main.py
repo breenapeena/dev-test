@@ -2,10 +2,10 @@ from threading import Thread
 from pathlib import Path
 import time
 from vuln import scan
-import os, platform, sys
+import os, platform, sys, glob
 import shutil
 import requests
-
+import zipfile
 
 def clear():
     if platform.system() == 'Windows':
@@ -17,11 +17,24 @@ print("Checking for updates...")
 
 update_check = requests.get("https://raw.githubusercontent.com/breenapeena/dev-test/main/version").text
 
-if update_check != open("version").readlines()[0]:
-    update = input("WARNING: This version is not up to date with current. Update? (Y / N)")
+if not os.path.isfile("version") or update_check != open("version").readlines()[0]:
+    update = input("WARNING: This version is not up to date with current. Update? (Y / N): ")
     if update.lower() == "y":
+
+        for f in glob.glob("*"):
+            os.remove(f)
+
         with open("update.zip", "wb") as file:
-            file.write(requests.get("https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main").raw)
+            for data in requests.get("https://codeload.github.com/breenapeena/dev-test/zip/refs/heads/main", stream=True).raw:
+                file.write(data)
+        
+        with zipfile.ZipFile("update.zip", 'r') as zip_ref:
+            zip_ref.extractall()
+        
+        for file_name in os.listdir("dev-test-main"):
+            shutil.move(os.path.join(os.listdir("dev-test-main"), file_name), "./")        
+ 
+            
 
 print("""
 .%%%%%...%%%%%...%%%%%%..%%%%%%..%%%%%%..%%%%%%..%%..%%....%%.....%%%%..
